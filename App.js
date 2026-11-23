@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+// Array com 7 opções de sorteio
 const opcoes = [
   {
     nome: 'Trevo da Sorte',
@@ -39,27 +40,37 @@ const opcoes = [
   }
 ];
 
+// Classe principal do aplicativo
 export default class App extends Component {
 
+  // Inicialização do aplicativo
   constructor(props) {
     super(props);
 
+    // Estado inicial da aplicação
     this.state = {
       resultado: 'Sua sorte está esperando!',
       imagem: opcoes[0].imagem
     };
   }
 
+  // Função responsável por realizar o sorteio
   sortear = () => {
+
+    // Escolhe uma posição aleatória do array
     const indice = Math.floor(Math.random() * opcoes.length);
+
+    // Obtém a opção sorteada
     const escolhido = opcoes[indice];
 
+    // Atualiza o resultado e a imagem na tela
     this.setState({
       resultado: escolhido.nome,
       imagem: escolhido.imagem
     });
   };
 
+  // Renderização da interface
   render() {
     return (
       <View style={styles.container}>
@@ -72,18 +83,21 @@ export default class App extends Component {
 
         <View style={styles.card}>
 
+          {/* Imagem correspondente ao sorteio */}
           <Image
             source={{ uri: this.state.imagem }}
             style={styles.imagem}
             resizeMode="contain"
           />
 
+          {/* Resultado exibido na tela */}
           <Text style={styles.resultado}>
             {this.state.resultado}
           </Text>
 
         </View>
 
+        {/* Botão que executa a função de sorteio */}
         <TouchableOpacity
           style={styles.botao}
           onPress={this.sortear}
@@ -102,6 +116,7 @@ export default class App extends Component {
   }
 }
 
+// Estilização dos componentes
 const styles = StyleSheet.create({
 
   container: {
